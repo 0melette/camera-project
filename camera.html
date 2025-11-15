@@ -430,7 +430,7 @@
 
   // Load photos from custom API
   function loadPhotos() {
-    fetch('https://omelette-cameraproject-nicumh-6050c5-148-135-138-113.traefik.me/photos')
+    fetch('https://0melette-flickr.yunz.app/photos')
       .then(r => r.json())
       .then(data => {
         photos = data.map(item => ({
