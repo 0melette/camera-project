@@ -10,152 +10,371 @@
     background-color: #ffddee;
     font-family: 'Comic Sans MS', cursive, sans-serif;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
+    padding: 80px 20px 20px;
+  }
+
+  .main-container {
+    display: flex;
+    gap: 30px;
+    max-width: 1400px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .camera {
     background-color: #ffb6c1;
-    border-radius: 30px;
-    box-shadow: inset -4px -4px #ff99aa, inset 4px 4px #fff;
-    width: 350px;
-    height: 480px;
+    border-radius: 40px;
+    box-shadow: inset -6px -6px #ff99aa, inset 6px 6px #fff, 0 10px 30px rgba(0,0,0,0.2);
+    width: 500px;
+    height: 580px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 20px;
+    padding: 30px;
     position: relative;
+    flex-shrink: 0;
   }
 
   .screen {
-    width: 250px;
-    height: 180px;
+    width: 380px;
+    height: 300px;
     background-color: #000;
-    border: 4px solid #333;
-    border-radius: 10px;
+    border: 6px solid #333;
+    border-radius: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 30px;
+    overflow: hidden;
   }
 
   .screen img {
     max-width: 100%;
     max-height: 100%;
-    border-radius: 8px;
+    border-radius: 10px;
+    user-select: none;
+    pointer-events: none;
   }
 
   .buttons {
     position: absolute;
-    right: 20px;
+    right: 30px;
     top: 100px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 18px;
   }
 
   .button {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    border: 2px solid #666;
+    border: 3px solid #666;
     background-color: #ffdf5a;
-    box-shadow: inset -2px -2px #fff, inset 2px 2px #cc9900;
-    font-size: 16px;
+    box-shadow: inset -3px -3px #fff, inset 3px 3px #cc9900;
+    font-size: 20px;
     cursor: pointer;
+    transition: all 0.1s;
   }
 
   .button:active {
-    box-shadow: inset 2px 2px #fff, inset -2px -2px #cc9900;
+    box-shadow: inset 3px 3px #fff, inset -3px -3px #cc9900;
+  }
+
+  .button:hover {
+    transform: scale(1.05);
   }
 
   .print-slot {
-    width: 200px;
+    width: 320px;
     height: 80px;
     background-color: #f5f5f5;
-    border: 2px solid #ccc;
-    border-radius: 8px;
+    border: 3px solid #ccc;
+    border-radius: 10px;
     position: absolute;
-    bottom: 30px;
+    bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     overflow: hidden;
   }
 
-  .print-photo {
-    width: 180px;
-    filter: grayscale(100%) blur(2px) contrast(1.3);
+  .print-photo-slot {
+    width: 280px;
+    filter: grayscale(100%) blur(1px) contrast(1.3);
     transform: translateY(100%);
     opacity: 0;
   }
 
-  .print-photo.show {
-    animation: printout 3s ease-out forwards;
+  .print-photo-slot.show {
+    animation: printout 2s ease-out forwards;
   }
 
   @keyframes printout {
     0% {
-      transform: translateY(100%) scaleY(0.8);
+      transform: translateY(-100%) scaleY(0.9);
       opacity: 0;
       filter: grayscale(100%) blur(2px) brightness(0.8);
     }
     50% {
-      transform: translateY(20%) scaleY(1);
-      opacity: 0.8;
-      filter: grayscale(100%) blur(1.5px);
+      transform: translateY(-20%) scaleY(1);
+      opacity: 0.9;
+      filter: grayscale(100%) blur(1px);
     }
     100% {
       transform: translateY(0);
       opacity: 1;
-      filter: grayscale(0%) blur(0.5px) brightness(1.1);
+      filter: grayscale(0%) blur(0.5px) brightness(1.05);
     }
   }
 
   .indicator {
     position: absolute;
-    right: 25px;
-    top: 40px;
+    right: 35px;
+    top: 35px;
     display: flex;
-    gap: 8px;
+    gap: 10px;
   }
 
   .led {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
   }
 
   .led.blue { background-color: #00f; }
   .led.green { background-color: #0f0; }
+
+  .info-panel {
+    display: none;
+  }
+
+  .info-section {
+    display: none;
+  }
+
+  .info-section h3 {
+    display: none;
+  }
+
+  .info-section p {
+    display: none;
+  }
+
+  .changelog-item {
+    display: none;
+  }
+
+  .changelog-item:last-child {
+    display: none;
+  }
+
+  .changelog-date {
+    display: none;
+  }
+
+  .button-group {
+    display: none;
+  }
+
+  .action-button {
+    display: none;
+  }
+
+  .action-button:active {
+    display: none;
+  }
+
+  .action-button:hover {
+    display: none;
+  }
+
+  .photo-counter {
+    text-align: center;
+    font-size: 0.85rem;
+    color: #666;
+    padding: 5px;
+  }
+
+  /* Printed photo styles */
+  .printed-photo {
+    position: fixed;
+    background: white;
+    border: 10px solid #fff;
+    box-shadow: 3px 3px 12px rgba(0,0,0,0.3);
+    cursor: grab;
+    user-select: none;
+    z-index: 100;
+  }
+
+  .printed-photo:active {
+    cursor: grabbing;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+  }
+
+  .printed-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%) contrast(1.2);
+    pointer-events: none;
+  }
+
+  .photo-delete-btn {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background-color: #ff5555;
+    border: 1px solid #cc0000;
+    border-radius: 50%;
+    color: white;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 110;
+    transition: all 0.15s;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .photo-delete-btn:hover {
+    background-color: #ff7777;
+    transform: scale(1.15);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.2);
+  }
+
+  .trash-button {
+    position: fixed;
+    top: 90px;
+    right: 20px;
+    width: 28px;
+    height: 28px;
+    padding: 2px;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #dfdfdf;
+    border-left-color: #dfdfdf;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 1px;
+    transition: all 0.05s;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .trash-button:active {
+    border-top-color: #808080;
+    border-left-color: #808080;
+    border-right-color: #dfdfdf;
+    border-bottom-color: #dfdfdf;
+  }
+
+  .trash-button:hover {
+    background-color: #d0d0d0;
+  }
+
+  .control-panel {
+    position: fixed;
+    top: 90px;
+    right: 55px;
+    width: 28px;
+    height: 28px;
+    padding: 2px;
+    background-color: #c0c0c0;
+    border: 2px solid;
+    border-top-color: #dfdfdf;
+    border-left-color: #dfdfdf;
+    border-right-color: #808080;
+    border-bottom-color: #808080;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    border-radius: 1px;
+    font-size: 1rem;
+    transition: all 0.05s;
+    z-index: 90;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .control-panel:active {
+    border-top-color: #808080;
+    border-left-color: #808080;
+    border-right-color: #dfdfdf;
+    border-bottom-color: #dfdfdf;
+  }
+
+  .control-panel:hover {
+    background-color: #d0d0d0;
+  }
+
+  @media (max-width: 900px) {
+    .main-container {
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-panel {
+      width: 100%;
+      max-width: 350px;
+    }
+
+    .camera {
+      width: 450px;
+      height: 650px;
+    }
+  }
 </style>
 </head>
 <body>
   <div id="navbar-container"></div>
 
-  <div class="camera">
-    <div class="indicator">
-      <div class="led blue"></div>
-      <div class="led green"></div>
+  <div class="main-container">
+    <div class="camera">
+      <div class="indicator">
+        <div class="led blue"></div>
+        <div class="led green"></div>
+      </div>
+
+      <div class="screen">
+        <img id="photo" src="" alt="Preview">
+      </div>
+
+      <div class="buttons">
+        <button class="button" id="prev" title="Previous photo">◀</button>
+        <button class="button" id="ok" title="Open on Flickr">🔗</button>
+        <button class="button" id="next" title="Next photo">▶</button>
+        <button class="button" id="print" title="Print photo">★</button>
+      </div>
+
+      <div class="print-slot">
+        <img id="print-photo" class="print-photo-slot" src="" alt="Print Output">
+      </div>
+
+      <div class="photo-counter">
+        <span id="photo-index">0</span> / <span id="photo-total">0</span>
+      </div>
     </div>
 
-    <div class="screen">
-      <img id="photo" src="" alt="Preview">
-    </div>
-
-    <div class="buttons">
-      <button class="button" id="prev">◀</button>
-      <button class="button" id="ok">✔</button>
-      <button class="button" id="next">▶</button>
-      <button class="button" id="print">★</button>
-    </div>
-
-    <div class="print-slot">
-      <img id="print-photo" class="print-photo" src="" alt="Print Output">
-    </div>
   </div>
+
+  <button class="control-panel" id="sound-toggle" title="Toggle sound">🔊</button>
+  <button class="trash-button" id="clear-all" title="Clear all printed photos">🗑️</button>
 
 <script>
   // Load navbar from main repo
@@ -168,44 +387,234 @@
 
   let photos = [];
   let index = 0;
+  let soundEnabled = true;
+  let currentPage = 1;
+  let printedPhotos = new Map();
   const photo = document.getElementById('photo');
-  const printPhoto = document.getElementById('print-photo');
-  const printSound = new Audio('https://cdn.pixabay.com/audio/2021/09/13/audio_3e93956b4f.mp3'); // safe open sound
 
-  // Custom API loader
+  // Sound effects (using Web Audio API to create simple tones)
+  const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+
+  function playTone(frequency, duration) {
+    if (!soundEnabled) return;
+    const now = audioContext.currentTime;
+    const osc = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    osc.connect(gain);
+    gain.connect(audioContext.destination);
+    osc.frequency.value = frequency;
+    gain.gain.setValueAtTime(0.3, now);
+    gain.gain.exponentialRampToValueAtTime(0.01, now + duration);
+    osc.start(now);
+    osc.stop(now + duration);
+  }
+
+  const sounds = {
+    shutter: () => {
+      playTone(800, 0.1);
+      setTimeout(() => playTone(600, 0.1), 50);
+    },
+    print: () => {
+      playTone(400, 0.2);
+      setTimeout(() => playTone(300, 0.2), 100);
+    },
+    navigate: () => playTone(500, 0.1)
+  };
+
+  function playSound(soundName) {
+    if (!soundEnabled) return;
+    if (sounds[soundName]) {
+      sounds[soundName]();
+    }
+  }
+
+  // Load photos from custom API
   function loadPhotos() {
     fetch('https://omelette-cameraproject-nicumh-6050c5-148-135-138-113.traefik.me/photos')
       .then(r => r.json())
       .then(data => {
-        photos = data.map(item => item.url.replace('_m.', '_b.'));
+        photos = data.map(item => ({
+          src: item.url.replace('_m.', '_b.'),
+          link: item.link || '#',
+          title: item.title || 'Photo'
+        }));
         if (photos.length > 0) {
-          photo.src = photos[0];
+          photo.src = photos[0].src;
         }
+        updateCounter();
       })
-      .catch(err => console.error('Failed to load photos:', err));
+      .catch(err => {
+        console.error('Failed to load from custom API, falling back to Flickr:', err);
+        loadFlickrFeed();
+      });
+  }
+
+  // Load Flickr photos with pagination (fallback)
+  function loadFlickrFeed(page = 1) {
+    const url = `https://www.flickr.com/services/feeds/photos_public.gne?id=203880952@N08&format=json&page=${page}&per_page=20`;
+    const callbackName = `jsonFlickrFeed${Date.now()}_${page}`;
+
+    window[callbackName] = function(data) {
+      const newPhotos = data.items.map(item => ({
+        src: item.media.m.replace('_m.', '_b.'),
+        link: item.link,
+        title: item.title
+      }));
+
+      if (page === 1) {
+        photos = newPhotos;
+      } else {
+        photos = photos.concat(newPhotos);
+      }
+
+      if (photos.length > 0 && page === 1) {
+        photo.src = photos[0].src;
+      }
+      updateCounter();
+
+      // Clean up the callback
+      delete window[callbackName];
+    };
+
+    const script = document.createElement('script');
+    script.src = url.replace('format=json', `format=json&jsoncallback=${callbackName}`);
+    script.id = `flickr-script-${page}`;
+    document.body.appendChild(script);
+  }
+
+  function updateCounter() {
+    document.getElementById('photo-index').textContent = index + 1;
+    document.getElementById('photo-total').textContent = photos.length;
+  }
+
+  function createPrintedPhoto(photoSrc, photoLink, photoTitle) {
+    const id = Date.now();
+    const width = 280;
+    const height = 280;
+
+    const container = document.createElement('div');
+    container.className = 'printed-photo';
+    container.id = `print-${id}`;
+    container.style.width = width + 'px';
+    // Position photos below the print slot area, centered-ish
+    const baseTop = 500;
+    const baseLeft = window.innerWidth / 2 - width / 2;
+    container.style.left = baseLeft + 'px';
+    container.style.top = baseTop + 'px';
+
+    const img = document.createElement('img');
+    img.src = photoSrc;
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.className = 'photo-delete-btn';
+    deleteBtn.innerHTML = '✕';
+    deleteBtn.onclick = (e) => {
+      e.stopPropagation();
+      container.remove();
+      printedPhotos.delete(id);
+    };
+
+    container.appendChild(img);
+    container.appendChild(deleteBtn);
+
+    document.body.appendChild(container);
+    printedPhotos.set(id, container);
+
+    // Make draggable
+    makeDraggable(container);
+  }
+
+  function makeDraggable(element) {
+    let offsetX = 0, offsetY = 0;
+    let isDragging = false;
+
+    element.addEventListener('mousedown', (e) => {
+      if (e.target.className === 'photo-delete-btn') return;
+
+      isDragging = true;
+      offsetX = e.clientX - element.offsetLeft;
+      offsetY = e.clientY - element.offsetTop;
+
+      document.addEventListener('mousemove', onMouseMove);
+      document.addEventListener('mouseup', onMouseUp);
+    });
+
+    const onMouseMove = (e) => {
+      if (!isDragging) return;
+      element.style.left = (e.clientX - offsetX) + 'px';
+      element.style.top = (e.clientY - offsetY) + 'px';
+    };
+
+    const onMouseUp = () => {
+      isDragging = false;
+      document.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseup', onMouseUp);
+    };
   }
 
   document.getElementById('next').onclick = () => {
     if (photos.length === 0) return;
+    playSound('navigate');
     index = (index + 1) % photos.length;
-    photo.src = photos[index];
+    photo.src = photos[index].src;
+    updateCounter();
   };
 
   document.getElementById('prev').onclick = () => {
     if (photos.length === 0) return;
+    playSound('navigate');
     index = (index - 1 + photos.length) % photos.length;
-    photo.src = photos[index];
+    photo.src = photos[index].src;
+    updateCounter();
+  };
+
+  document.getElementById('ok').onclick = () => {
+    if (photos.length === 0) return;
+    playSound('shutter');
+    window.open(photos[index].link, '_blank');
   };
 
   document.getElementById('print').onclick = () => {
     if (photos.length === 0) return;
-    printPhoto.src = photos[index];
-    printPhoto.classList.remove('show');
-    void printPhoto.offsetWidth; // reset animation
-    printPhoto.classList.add('show');
-    printSound.play();
+    playSound('print');
+
+    const printPhotoEl = document.getElementById('print-photo');
+    printPhotoEl.src = photos[index].src;
+    printPhotoEl.classList.remove('show');
+    void printPhotoEl.offsetWidth; // reset animation
+    printPhotoEl.classList.add('show');
+
+    // Create draggable photo after animation starts
+    setTimeout(() => {
+      createPrintedPhoto(photos[index].src, photos[index].link, photos[index].title);
+    }, 400);
   };
 
+  document.getElementById('sound-toggle').onclick = function() {
+    soundEnabled = !soundEnabled;
+    this.textContent = soundEnabled ? '🔊' : '🔇';
+  };
+
+  document.getElementById('clear-all').onclick = () => {
+    if (printedPhotos.size === 0) return;
+    playSound('print');
+    printedPhotos.forEach(element => element.remove());
+    printedPhotos.clear();
+  };
+
+  // Keyboard controls
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight') {
+      document.getElementById('next').click();
+    } else if (e.key === 'ArrowLeft') {
+      document.getElementById('prev').click();
+    } else if (e.code === 'Space') {
+      e.preventDefault();
+      document.getElementById('print').click();
+    }
+  });
+
+  // Load photos from custom API
   loadPhotos();
 </script>
 </body>
